@@ -1,0 +1,34 @@
+/*
+ * keypad.h
+ *
+ *  Created on: Dec 30, 2019
+ *      Author: Sleem
+ */
+
+#ifndef KEYPAD_H_
+#define KEYPAD_H_
+
+#include <avr/io.h>
+#include "util/delay.h"
+#include "GPIO/GPIO.h"
+
+#define R0 0
+#define R1 1
+#define R2 2
+#define R3 3
+#define C0 4
+#define C1 5
+#define C2 6
+#define C3 7
+
+#define KPAD_PORT PRTC
+#define KEYPAD_PORT PORTC
+#define KEYPAD_PIN  PINC
+#define KEYPAD_DIR  DDRC
+
+void KEYPAD_Init (void );
+char KEYPAD_GET_KEY (void) ;
+
+
+
+#endif /* KEYPAD_H_ */

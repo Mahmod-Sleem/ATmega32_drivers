@@ -1,0 +1,44 @@
+/*
+ * ADC.c
+ *
+ *  Created on: Jan 7, 2020
+ *      Author: Sleem
+ */
+
+#include "ADC.h"
+#include "GPIO/GPIO.h"
+#include "avr/interrupt.h"
+
+
+#define  ADC_BUSY Bit_Is_Clear(ADCSRA,ADIF);
+
+u16 converted_data;
+static (*PtrToFun_CallBack)(u16 u16_value);
+ISR(ADC_vect)
+{
+	PtrToFun_CallBack(converted_data);
+
+}
+
+
+
+
+void ADC_Init (vref_select u8_Vref,Channel_Select u8_Channle ,
+			   Prescaller_Select u8_Prescaller , Mode_Select u8_mode  )
+{
+
+		ACCESS_REG_8BIT((ADCMUX+ADCBASE))    = 0;
+		ACCESS_REG_8BIT((ADCMUX+ADCBASE))	|= (vref<<6);										// set vref
+		ACCESS_REG_8BIT((ADCCON+ADCBASE))	|= (clk <<0);									// set clock + set type of trigger
+		ACCESS_REG_8BIT((ADCSFIOR+ADCBASE)) |= (mode <<5);
+		if (mode != FREE_RUNNING_MODE)
+		{
+			SET_BIT((ADCCON+ADCBASE),5);
+		}
+		SET_BIT((ADCCON+ADCBASE),7);
+
+}
+
+
+u16 ADC_Read (  Channel_Select u8_Channle);
+void ADC_Interrupt_Enable (void (*PtrToFun_CallBack)(u16 u16_value),Channel_Select u8_Channle );

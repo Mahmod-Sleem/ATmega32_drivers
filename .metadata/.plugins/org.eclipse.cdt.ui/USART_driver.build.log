@@ -1,0 +1,40 @@
+23:57:53 **** Incremental Build of configuration Debug for project USART_driver ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+In file included from ../main.c:8:
+e:/embedded/c_programming/avr_prepare/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: USART_driver.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,USART_driver.map -mmcu=atmega32 -o "USART_driver.elf"  ./GPIO/GPIO.o  ./USART.o ./main.o   
+Finished building target: USART_driver.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S USART_driver.elf  >"USART_driver.lss"
+Finished building: USART_driver.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex USART_driver.elf  "USART_driver.hex"
+Finished building: USART_driver.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 USART_driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    2596 bytes (7.9% Full)
+(.text + .data + .bootloader)
+
+Data:         39 bytes (1.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+23:57:53 Build Finished (took 890ms)
+

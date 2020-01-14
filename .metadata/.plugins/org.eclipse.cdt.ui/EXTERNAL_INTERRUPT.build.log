@@ -1,0 +1,20 @@
+02:46:06 **** Incremental Build of configuration Release for project EXTERNAL_INTERRUPT ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 EXTERNAL_INTERRUPT.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    6614 bytes (20.2% Full)
+(.text + .data + .bootloader)
+
+Data:        344 bytes (16.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+02:46:06 Build Finished (took 294ms)
+

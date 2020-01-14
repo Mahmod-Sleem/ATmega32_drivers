@@ -1,0 +1,23 @@
+/*
+ * ADC.c
+ *
+ *  Created on: Jan 7, 2020
+ *      Author: Sleem
+ */
+
+#include "ADC.h"
+#include "GPIO/GPIO.h"
+#include "avr/interrupt.h"
+
+static (*PtrToFun_CallBack)(u16 u16_value);
+ISR(adc_vect)
+
+
+
+
+void ADC_Init (vref_select u8_Vref,
+		       Channel_Select u8_Channle ,
+			   Prescaller_Select u8_Prescaller ,
+			   Mode_Select u8_mode  );
+u16 ADC_Read (  Channel_Select u8_Channle);
+void ADC_Interrupt_Enable (void (*PtrToFun_CallBack)(u16 u16_value),Channel_Select u8_Channle );

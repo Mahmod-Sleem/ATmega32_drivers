@@ -1,0 +1,71 @@
+/*
+ * USART.c
+ *
+ *  Created on: Jan 13, 2020
+ *      Author: Sleem
+ */
+#include <avr/io.h>
+#include<util/delay.h>
+#include "GPIO/GPIO.h"
+
+static void(*PtrToTxFucn)(void);
+void(*PtrToRxFucn)(void);
+void USART_Init (USART_CONFIG UsartConfig ) {
+
+
+}
+ // TRANSMITTER  FUNCTIONS
+void USART_TRANSMIT_DATA(u8 data )
+{
+
+}
+
+void USART_Tx_ENABLE(void)
+{
+
+}
+void USART_Tx_DISABLE(void)
+{
+
+}
+void USART_TxInt_ENABLE(void)
+{
+
+}
+void USART_INT_DISABLE(void)
+{
+
+}
+void USART_INT_TX_Handler  (void(*PtrToFucn)(void))
+{
+
+}
+
+
+// RECEIVER FUNCTIONS
+u8 USART_RECEIVE_DATA(u8 *PtrToVal)
+{
+
+return 0;}
+void USART_Tx_ENABLE(void)
+{
+
+
+}
+void USART_Tx_DISABLE(void)
+{
+
+}
+void USART_TxInt_ENABLE(void)
+{
+
+}
+void USART_INT_DISABLE(void)
+{
+
+}
+void USART_INT_TX_Handler  (void(*PtrToRxFucn)(void))
+{
+
+}
+

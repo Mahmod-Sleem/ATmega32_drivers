@@ -1,0 +1,20 @@
+01:45:00 **** Incremental Build of configuration Debug for project KEYPAD_driver ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 KEYPAD_driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    8446 bytes (25.8% Full)
+(.text + .data + .bootloader)
+
+Data:        332 bytes (16.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+01:45:01 Build Finished (took 215ms)
+

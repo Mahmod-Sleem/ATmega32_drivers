@@ -1,0 +1,58 @@
+/*
+ * main.c
+ *
+ *  Created on: Jan 6, 2020
+ *      Author: Sleem
+ */
+
+
+#include <avr/interrupt.h>
+#include "LCD/LCD.h"
+#include <util/delay.h>
+#include "EXTI.h"
+ u8 count0=0 , count1=0 ;
+
+int main ()
+{
+
+
+//	GPIO_u8_WritePinVal(GICR,INT0,HIGH);
+	//GPIO_u8_WritePinVal(GICR,INT1,HIGH);
+        GICR=0xc0;   //Enable External Interrupts INT0 and INT1
+	    GPIO_u8_WritePinVal(MCUCR,ISC00,HIGH);
+	    GPIO_u8_WritePinVal(MCUCR,ISC10,HIGH);
+
+	    //MCUCR=0x08;  //Configure INT0 active low level triggered and INT1 as falling edge
+	    LCD_init();
+	    sei();     // Enable global interrupts by setting global interrupt enable bit in SREG
+
+
+		LCD_Send_String("WELCOME SLEEM");
+		_delay_ms(500);
+		LCD_Send_Command(LCD_CLEAR_SCREEN);
+		LCD_Send_String("INT0:");
+
+			LCD_GotoXY(1,0);
+			LCD_Send_String("INT1:");
+
+
+while(1)
+{
+	LCD_GotoXY(0,7);
+	LCD_display_number(count0);
+	LCD_GotoXY(1,7);
+	LCD_display_number(count1);
+	//LCD_Send_Command(LCD_CLEAR_SCREEN);
+}
+
+
+}
+
+ISR (INT0_vect)          //External interrupt_zero ISR
+{
+	count0++;
+}
+ISR (INT1_vect)        //External interrupt_one ISR
+{
+	count1++;
+}

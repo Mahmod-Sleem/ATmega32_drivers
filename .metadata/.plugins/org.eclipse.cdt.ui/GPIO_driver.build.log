@@ -1,0 +1,20 @@
+23:02:02 **** Incremental Build of configuration Debug for project GPIO_driver ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 GPIO_driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    1158 bytes (3.5% Full)
+(.text + .data + .bootloader)
+
+Data:         24 bytes (1.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+23:02:02 Build Finished (took 234ms)
+

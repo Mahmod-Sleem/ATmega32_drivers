@@ -1,0 +1,31 @@
+/*
+ * adc.h
+ *
+ *  Created on: Jan 7, 2020
+ *      Author: Sleem
+ */
+
+#ifndef ADC_H_
+#define ADC_H_
+
+
+ //ADC Multiplexer SelectionRegister – ADMUX
+//    Bit 7:6 – REFS1:0: Reference Selection Bits
+typedef enum {AFRE=0,
+			AVCC=1 ,
+		INTERNAL_VREF=3}vref_select ;
+		//ADC Multiplexer SelectionRegister – ADMUX
+	//Bits 4:0 – MUX4:0: Analog Channel and Gain Selection Bits
+typedef enum {
+
+	 ADC0=0
+	 ADC1,
+	 ADC2,
+	 ADC3 ,
+	 ADC4,
+	 ADC5,
+	 ADC6,
+	 ADC7,
+}mode_select ;
+
+#endif /* ADC_H_ */

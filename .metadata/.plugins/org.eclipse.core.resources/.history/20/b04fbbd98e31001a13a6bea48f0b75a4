@@ -1,0 +1,36 @@
+/*
+ * main.c
+ *
+ *  Created on: Jan 7, 2020
+ *      Author: Sleem
+ */
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "ADC.h"
+#include "GPIO/GPIO.h"
+
+
+void ADC_HANDLER(u16 val)
+	{
+		PORTC = (val/2.5)*1023;
+
+	}
+
+
+int main(void)
+	{
+	ADC_Init(AFRE,ADC0,CLK_ADC_DIV_128,FREE_RUNNING_MODE);
+		DDRC = 0xff;
+		DDRD = 0xff;
+		sei();
+
+		while (1)
+		{
+			ADC_Interrupt_Enable(ADC_HANDLER,ADC0);
+			ADC_Read(ADC0);
+
+		}
+	}
+
+
+

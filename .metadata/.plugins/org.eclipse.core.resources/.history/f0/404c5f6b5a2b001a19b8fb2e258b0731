@@ -1,0 +1,38 @@
+/*
+ * KEYPAD.c
+ *
+ *  Created on: Dec 30, 2019
+ *      Author: Sleem
+ */
+#include "keypad.h"
+
+char KEYPAD_BUTTON[4][4]=
+{{'7','4','1','?'},{'8','5','2','0'},{'9','6','3','0'},{'/','*','-','+'}};
+
+void KEYPAD_Init (void )
+{
+	KEYPAD_DIR = 0xf0;
+	KEYPAD_PORT = 0xff ;
+
+}
+char KEYPAD_GET_KEY (void)
+{char pressed = 'H' ;
+
+	for (int i =4 ; i<8; i++)
+	{
+		GPIO_u8_WritePortVal(KPAD_PORT,0xff);
+		GPIO_u8_WritePinVal(KPAD_PORT,i,LOW) ;
+		for (int j=0 ;j<4 ; j++)
+		{
+			if (!(GET_BIT(KEYPAD_PORT,j)))
+			{
+				while (!(GET_BIT(KEYPAD_PORT,j)));// susbend   until switch is released
+			 pressed =  KEYPAD_BUTTON[i-4][j];
+
+				_delay_ms(10); // delay to avoid bouncing
+		}
+		}
+		//GPIO_u8_WritePinVal(KPAD_PORT,i,HIGH) ;
+	}
+	return pressed ;
+}

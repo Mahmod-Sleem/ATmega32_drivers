@@ -1,0 +1,34 @@
+/*
+ * main.c
+ *
+ *  Created on: Jan 7, 2020
+ *      Author: Sleem
+ */
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "ADC.h"
+#include "GPIO/GPIO.h"
+
+
+void my_fun(u16 val)
+	{
+		PORTC = (val/2.5)*1023;
+
+	}
+
+
+int main(void)
+	{
+		DDRA = 0;
+		DDRC = 0xff;
+		DDRD = 0xff;
+		sei();
+
+		while (1)
+		{
+			ADC_Interrupt_Enable(my_fun,CHANNEL0);
+		}
+	}
+
+
+

@@ -1,0 +1,103 @@
+/*
+ * USART.c
+ *
+ *  Created on: Jan 13, 2020
+ *      Author: Sleem
+ */
+#include <avr/io.h>
+#include<util/delay.h>
+#include <avr/interrupt.h>
+#include "GPIO/GPIO.h"
+#include "USART.h"
+static void(*PtrToTxFucn)(void);
+static void(*PtrToRxFucn)(void);
+USART_CONFIG GlobalUsartConfig ;
+
+//*******************
+typedef struct uSART_CONFIG
+{
+	USART_Mode_Select ModeSelect ;
+	USART_TX TxMode ;
+	USART_RX RxMode ;
+	USART_CHAR_SIZE DataBits ;
+	USART_PARITY ParityStatus ;
+	USART_STOP_BIT StopBitStatus ;
+	USART_TX_INTERRUPT TxStatus ;
+	USART_RX_INTERRUPT RxStatus ;
+
+}USART_CONFIG;
+
+//***********************
+
+void USART_Init (USART_CONFIG UsartConfig )
+{
+
+	u16 UBRR_value ;
+	GlobalUsartConfig = UsartConfig;
+
+	// adjust BUAD RATE by getting UBBR value
+	if (GlobalUsartConfig.ModeSelect==USART_ASynchronous)
+	{
+		if (GlobalUsartConfig.SPEED_MODE == USART_NORMAL_SPEED)
+		{
+			UBRR_VAL = (unsigned long)((USART_FOSC/(16*USART_BAUD))-1) ;
+		}
+	}
+
+
+}
+ // TRANSMITTER  FUNCTIONS
+void USART_TRANSMIT_DATA(u8 data )
+{
+
+}
+
+void USART_Tx_ENABLE(void)
+{
+
+}
+void USART_Tx_DISABLE(void)
+{
+
+}
+void USART_TxInt_ENABLE(void)
+{
+
+}
+void USART_INT_DISABLE(void)
+{
+
+}
+void USART_INT_TX_Handler  (void(*PtrToFucn)(void))
+{
+
+}
+
+
+// RECEIVER FUNCTIONS
+u8 USART_RECEIVE_DATA(u8 *PtrToVal)
+{
+
+return 0;}
+void USART_Tx_ENABLE(void)
+{
+
+
+}
+void USART_Tx_DISABLE(void)
+{
+
+}
+void USART_TxInt_ENABLE(void)
+{
+
+}
+void USART_INT_DISABLE(void)
+{
+
+}
+void USART_INT_TX_Handler  (void(*PtrToRxFucn)(void))
+{
+
+}
+

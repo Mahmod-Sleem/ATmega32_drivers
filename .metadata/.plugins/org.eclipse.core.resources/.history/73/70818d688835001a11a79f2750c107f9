@@ -1,0 +1,52 @@
+/*
+ * KEYPAD.c
+ *
+ *  Created on: Dec 31, 2019
+ *      Author: Sleem
+ */
+
+#include "KEYPAD.h"
+
+u8 ARR_BUTTON[4][4]=
+				   {
+	                {'7','4','1','?'},
+					{'8','5','2','0'},
+					{'9','6','3','='},
+					{'/','*','-','+'}
+				   };
+#include "KEYPAD.h"
+
+
+void  Keypad_init()
+{
+	GPIO_u8_WritePortDir(KEYPAD_PORT,0xf0);
+	//the part of the keypad port where the rows are connected.
+	keypadPORT = 0xFF ;
+}
+
+
+
+u8 Keypad_getkey()
+{
+	u8 col, row, result ='#' ;
+	for(col =4; col <0; col++)
+	{
+
+		GPIO_u8_WritePinVal(KEYPAD_PORT,col,LOW);//send a low to a particular row of the keypad
+		for(row=4; row <8; row++)
+		{
+			if(Bit_Is_Clear(keypadPORT,row))//check if key is pressed
+			{
+				while (Bit_Is_Clear(keypadPORT,row));
+				result =  ARR_BUTTON[row-4][col];
+				return result ;
+				_delay_ms(100);
+		    }
+	}
+		return result ;
+		GPIO_u8_WritePinVal(KEYPAD_PORT,col,HIGH);
+}
+return result ;
+}
+
+

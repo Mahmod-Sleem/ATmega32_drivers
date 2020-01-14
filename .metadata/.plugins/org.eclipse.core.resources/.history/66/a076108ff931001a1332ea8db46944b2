@@ -1,0 +1,65 @@
+/*
+ * ADC.c
+ *
+ *  Created on: Jan 7, 2020
+ *      Author: Sleem
+ */
+
+#include "ADC.h"
+#include "GPIO/GPIO.h"
+#include "avr/interrupt.h"
+
+
+#define  ADC_BUSY Bit_Is_Clear(ADCSRA,ADIF);
+
+u16 converted_data =0 ;
+
+static void  (*Handler_Function)(u16 u16_value);
+ISR(ADC_vect)
+{
+	Handler_Function(converted_data);
+
+}
+
+
+
+
+void ADC_Init (vref_select u8_Vref,Channel_Select u8_Channle ,
+			   Prescaller_Select u8_Prescaller , Mode_Select u8_mode  )
+{
+	// clear  the vlue of ADMUX  or you can ignore this step cuase it's clear by the defult
+	   GPIO_u8_WritePortVal(ADMUX,0x00);
+	   GPIO_u8_WritePortVal(ADCSRA,0x00);// clear the value of ADCSRA
+	   GPIO_u8_WritePinDir(PRTA,u8_Channle,INPUT); // set the adc pin as input
+	   GPIO_u8_WritePinVal(ADMUX, MUX0,u8_Channle);// set channle
+	   GPIO_u8_WritePinVal(ADMUX,REFS0,u8_Vref);// set vref
+	   GPIO_u8_WritePinVal(ADCSRA, ADPS0,u8_Prescaller);// set prescaller
+	   GPIO_u8_WritePinVal(SFIOR, ADTS0,u8_mode);// set mode
+
+		if (u8_mode != FREE_RUNNING_MODE)
+		{
+			SET_BIT(ADCSRA,ADATE);//Bit 5 – ADATE: ADC Auto Trigger Enable
+			SET_BIT(ADMUX,ADLAR);//Bit 5 – ADATE: ADC Auto Trigger Enable
+
+		}
+		SET_BIT(ADCSRA,ADEN);
+}
+
+
+u16 ADC_Read ( Channel_Select u8_Channle)
+{
+    	ADMUX &= ~(0x1f);// clear channels value
+    	ADMUX |= u8_Channle;// set channel
+		SET_BIT(ADCSRA,ADSC);// start conversion for one shoot
+		while(Bit_Is_Clear(ADCSRA,ADIF));// stay here while adc is busy
+		converted_data = ((ADCH << 8) | (ADCL<<0)) ;
+		return  converted_data;
+
+}
+void ADC_Interrupt_Enable (void (*PtrToFun_CallBack)(u16 u16_value),Channel_Select u8_Channle )
+{
+	   Handler_Function = PtrToFun_CallBack; //
+		SET_BIT(ADCSRA,ADIE); // set ADIE as set PIE for this module
+		   GPIO_u8_WritePinVal(ADMUX, MUX0,u8_Channle);// set channle
+		SET_BIT(ADCSRA,ADSC);	 // start conversion
+}

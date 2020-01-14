@@ -1,0 +1,24 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 30, 2019
+ *      Author: Sleem
+ */
+
+#include "LCD.h"
+
+int main (void )
+{
+
+	LCD_lcd_init() ;
+	while (1)
+	{
+		LCD_Send_A_Command(LCD_CLEAR_SCREEN);
+		LCD_Send_A_String("WELCOME TO OUR DATA");
+		_delay_ms(1000) ;
+		LCD_Send_A_Command(LCD_CLEAR_SCREEN);
+		LCD_GotoXY(0,0);
+		LCD_Send_A_Character('S');
+
+	}
+}

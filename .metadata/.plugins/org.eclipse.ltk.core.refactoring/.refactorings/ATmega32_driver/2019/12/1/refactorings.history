@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ATmega32_driver/GPIO/ATmega32_SFRegisters.h&apos; to &apos;GPIO.h&apos;" description="Rename resource &apos;ATmega32_SFRegisters.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="GPIO/ATmega32_SFRegisters.h" name="GPIO.h" stamp="1577698252479" updateReferences="true"/>
+</session>

@@ -1,0 +1,42 @@
+19:25:18 **** Incremental Build of configuration Release for project TIMER0_driver ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -Os -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: TIMER0_driver.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,TIMER0_driver.map -mmcu=atmega32 -o "TIMER0_driver.elf"  ./LCD/LCD.o  ./GPIO/GPIO.o  ./main.o ./timer0.o   
+Finished building target: TIMER0_driver.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S TIMER0_driver.elf  >"TIMER0_driver.lss"
+Finished building: TIMER0_driver.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex TIMER0_driver.elf  "TIMER0_driver.hex"
+Finished building: TIMER0_driver.hex
+ 
+Create eeprom image (ihex format)
+avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex TIMER0_driver.elf  "TIMER0_driver.eep"
+Finished building: TIMER0_driver.eep
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 TIMER0_driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    6258 bytes (19.1% Full)
+(.text + .data + .bootloader)
+
+Data:        312 bytes (15.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+19:25:19 Build Finished (took 1s.184ms)
+

@@ -1,0 +1,38 @@
+16:27:17 **** Incremental Build of configuration Debug for project ATmega32_driver ****
+make all 
+Building file: ../ATMEGA32/main.asm
+Invoking: AVR Assembler
+avr-gcc -x assembler-with-cpp -g3 -gdwarf-2 -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"ATMEGA32/main.d" -MT"ATMEGA32/main.o" -c -o "ATMEGA32/main.o" "../ATMEGA32/main.asm"
+Finished building: ../ATMEGA32/main.asm
+ 
+Building target: ATmega32_driver.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,ATmega32_driver.map -mmcu=atmega32 -o "ATmega32_driver.elf"  ./GPIO/GPIO.o ./GPIO/main.o  ./ATMEGA32/main.o   
+Finished building target: ATmega32_driver.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S ATmega32_driver.elf  >"ATmega32_driver.lss"
+Finished building: ATmega32_driver.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex ATmega32_driver.elf  "ATmega32_driver.hex"
+Finished building: ATmega32_driver.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 ATmega32_driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    4298 bytes (13.1% Full)
+(.text + .data + .bootloader)
+
+Data:         32 bytes (1.6% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+16:27:18 Build Finished (took 953ms)
+

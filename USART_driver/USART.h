@@ -1,0 +1,119 @@
+/*
+ * UART.h
+ *
+ *  Created on: Jan 13, 2020
+ *      Author: Sleem
+ */
+
+#ifndef USART_H_
+#define USART_H_
+
+#include "GPIO/GPIO.h"
+#define USART_BUADRATE 9600
+#define F_CPU 1000000UL
+
+
+// UMSEL at UCSRC
+typedef enum
+{
+	USART_ASynchronous =0 ,
+	USART_Synchronous =1
+}USART_Mode_Select;
+
+//U2X at UCSRA
+typedef enum
+{
+	USART_NORMAL_SPEED =0 ,
+	USART_DOUBLE_SPEED =1
+}USART_SPEED_MODE;
+
+// UCSRB  at TXEN
+typedef enum
+{
+	USART_TX_DISABLE=0,
+	USART_TX_ENABLE =1
+}USART_TX;
+
+// UCSRB  at RXEN
+typedef enum
+{
+	USART_RX_DISABLE=0,
+	USART_RX_ENABLE =1
+}USART_RX;
+
+// UCSRC UCSZ1 , UCSZ0  && UCSRB UCSZ2
+typedef enum
+{
+	USART_5BIT_CHAR=0,
+	USART_6BIT_CHAR=1,
+	USART_7BIT_CHAR=2,
+	USART_8BIT_CHAR=3,
+	USART_9BIT_CHAR=7
+}USART_CHAR_SIZE;
+
+// UCSRC UPM1 , UPM0
+typedef enum
+{
+	USART_PARITY_DISABLE=0,
+	USART_EVEN_PARITY =2,
+	USART_ODD_PARITY_ =3
+
+}USART_PARITY;
+
+//UCSRC USBS
+typedef enum
+{
+	USART_1BIT_STOP=0,
+	USART_2BIT_STOP =1
+
+}USART_STOP_BIT;
+
+// UCSRB  TXIE
+typedef enum
+{
+	USART_TX_INT_DISABLE=0,
+	USART_TX_INT_ENABLE =1
+
+}USART_TX_INTERRUPT;
+
+// UCSRB  RXIE
+typedef enum
+{
+	USART_RX_INT_DISABLE=0,
+	USART_RX_INT_ENABLE =1
+
+}USART_RX_INTERRUPT;
+
+typedef struct uSART_CONFIG
+{
+	USART_Mode_Select ModeSelect ;
+	USART_SPEED_MODE SPEED_MODE;
+	USART_TX TxMode ;
+	USART_RX RxMode ;
+	USART_CHAR_SIZE DataBits ;
+	USART_PARITY ParityStatus ;
+	USART_STOP_BIT StopBitStatus ;
+	USART_TX_INTERRUPT TxStatus ;
+	USART_RX_INTERRUPT RxStatus ;
+
+}USART_CONFIG;
+
+
+void USART_Init (USART_CONFIG UsartConfig ) ;
+ // TRANSMITTER  FUNCTIONS
+void USART_TRANSMIT_DATA(u8 data );
+void USART_Tx_ENABLE(void);
+void USART_Tx_DISABLE(void);
+void USART_TxInt_ENABLE(void);
+void USART_TxINT_DISABLE(void);
+void USART_INT_TX_Handler  (void(*PtrToFucn)(void));
+
+
+// RECEIVER FUNCTIONS
+u8 USART_RECEIVE_DATA(u8 *PtrToVal);
+void USART_Rx_ENABLE(void);
+void USART_Rx_DISABLE(void);
+void USART_RxInt_ENABLE(void);
+void USART_RxINT_DISABLE(void);
+void USART_INT_RX_Handler  (void(*PtrTo_RxFucn)(void));
+#endif /* USART_H_ */

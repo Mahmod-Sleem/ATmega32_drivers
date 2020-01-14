@@ -1,0 +1,32 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 30, 2019
+ *      Author: Sleem
+ */
+#include "keypad.h"
+#include "LCD/LCD.h"
+
+int main ()
+{
+LCD_init();
+KEYPAD_Init();
+
+char pressed ;
+
+while (1)
+{
+	LCD_Send_String("WELCOME SLEEM");
+	LCD_GotoXY(1,0);
+pressed = KEYPAD_GET_KEY();
+ LCD_Send_Command(LCD_CLEAR_SCREEN);
+ LCD_Send_Character(pressed);
+_delay_ms(500);
+
+
+}
+
+
+
+}
+

@@ -1,0 +1,15 @@
+10:16:02 **** Incremental Build of configuration Debug for project TIMER0.driver ****
+make all 
+Building file: ../timer0.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"timer0.d" -MT"timer0.o" -c -o "timer0.o" "../timer0.c"
+Finished building: ../timer0.c
+ 
+Building target: TIMER0.driver.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,TIMER0.driver.map -mmcu=atmega32 -o "TIMER0.driver.elf"  ./timer0.o   
+e:/embedded/c_programming/avr_prepare/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o:(.init9+0x0): undefined reference to `main'
+make: *** [TIMER0.driver.elf] Error 1
+
+10:16:07 Build Finished (took 5s.67ms)
+
